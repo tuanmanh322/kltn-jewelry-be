@@ -12,7 +12,7 @@ public class Sale implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Column(name = "code")
-    private Integer code;
+    private Double code;
 
     @Column(name = "description")
     private String description;

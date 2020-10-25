@@ -3,6 +3,8 @@ package com.kl.jewelry.service.impl;
 import com.kl.jewelry.dao.ProductCustom;
 import com.kl.jewelry.dto.ProductDTO;
 import com.kl.jewelry.dto.ProductDetailDTO;
+import com.kl.jewelry.dto.ProductListDetailDTO;
+import com.kl.jewelry.dto.ProductListSaleDTO;
 import com.kl.jewelry.model.Category;
 import com.kl.jewelry.model.Color;
 import com.kl.jewelry.model.Product;
@@ -95,6 +97,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getRelativeProduct(Long idCategory, Long idColor) {
         return productRepository.findByIdCategoryAndIdColor(idCategory,idColor);
+    }
+
+    @Override
+    public List<ProductListSaleDTO> getAllIndexSale() {
+        return productCustom.getAllIndexSale();
     }
 
 

@@ -2,6 +2,8 @@ package com.kl.jewelry.service;
 
 import com.kl.jewelry.dto.ProductDTO;
 import com.kl.jewelry.dto.ProductDetailDTO;
+import com.kl.jewelry.dto.ProductListDetailDTO;
+import com.kl.jewelry.dto.ProductListSaleDTO;
 import com.kl.jewelry.model.Product;
 
 import java.util.List;
@@ -17,4 +19,5 @@ public interface ProductService {
 
     List<Product> getRelativeProduct(Long idCategory, Long idColor);
 
+    List<ProductListSaleDTO> getAllIndexSale();
 }

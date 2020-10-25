@@ -7,6 +7,7 @@ import com.kl.jewelry.dto.UserCheckinDTO;
 import com.kl.jewelry.dto.UserDTO;
 import com.kl.jewelry.dto.UserSearchDTO;
 import com.kl.jewelry.exception.ResultException;
+import com.kl.jewelry.model.Role;
 import com.kl.jewelry.model.User;
 import com.kl.jewelry.repository.RoleRepository;
 import com.kl.jewelry.repository.UserRepository;
@@ -502,6 +503,8 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = usersRepository.findById(id);
         if (user.isPresent()){
             UserDTO dto  = modelMapper.map(user.get(),UserDTO.class);
+            Role  role =  rolesRepository.findById(dto.getUserRole()).get();
+            dto.setUserRoleName(role.getName());
             return dto;
         }
         return null;

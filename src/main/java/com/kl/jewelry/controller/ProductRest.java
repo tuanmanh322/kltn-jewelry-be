@@ -2,6 +2,8 @@ package com.kl.jewelry.controller;
 
 import com.kl.jewelry.dto.ProductDTO;
 import com.kl.jewelry.dto.ProductDetailDTO;
+import com.kl.jewelry.dto.ProductListDetailDTO;
+import com.kl.jewelry.dto.ProductListSaleDTO;
 import com.kl.jewelry.model.Product;
 import com.kl.jewelry.service.ProductService;
 import org.springframework.http.HttpStatus;
@@ -44,5 +46,10 @@ public class ProductRest {
     @GetMapping("/relative/{idCate}/{idColor}")
     public ResponseEntity<List<Product>> getRelative(@PathVariable("idCate") Long idCate, @PathVariable("idColor") Long idColor) {
         return new ResponseEntity<>(productService.getRelativeProduct(idCate,idColor),HttpStatus.OK);
+    }
+
+    @GetMapping("/index-sale")
+    public ResponseEntity<List<ProductListSaleDTO>> getAllIndexSale() {
+        return new ResponseEntity<>(productService.getAllIndexSale(), HttpStatus.OK);
     }
 }

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api/media")
+@RequestMapping("/api/file-load")
 public class FileIOController {
     private static final Logger logger = LoggerFactory.getLogger(FileIOController.class);
 

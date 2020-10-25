@@ -24,7 +24,7 @@ public class UserDTO {
 
     private Boolean active;
 
-    private Integer userRole;
+    private Long userRole;
 
     private Date createdDate;
 
@@ -35,4 +35,6 @@ public class UserDTO {
     private String phone;
 
     private int sex;
+
+    private String userRoleName;
 }
