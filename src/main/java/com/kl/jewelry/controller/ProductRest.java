@@ -1,9 +1,6 @@
 package com.kl.jewelry.controller;
 
-import com.kl.jewelry.dto.ProductDTO;
-import com.kl.jewelry.dto.ProductDetailDTO;
-import com.kl.jewelry.dto.ProductListDetailDTO;
-import com.kl.jewelry.dto.ProductListSaleDTO;
+import com.kl.jewelry.dto.*;
 import com.kl.jewelry.model.Product;
 import com.kl.jewelry.service.ProductService;
 import org.springframework.http.HttpStatus;
@@ -51,5 +48,11 @@ public class ProductRest {
     @GetMapping("/index-sale")
     public ResponseEntity<List<ProductListSaleDTO>> getAllIndexSale() {
         return new ResponseEntity<>(productService.getAllIndexSale(), HttpStatus.OK);
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<ProductSearchDTO> searchProduct(@RequestBody ProductSearchDTO dto){
+        productService.productSearchDto(dto);
+        return new ResponseEntity<>(dto,HttpStatus.OK);
     }
 }

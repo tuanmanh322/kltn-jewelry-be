@@ -2,19 +2,15 @@ package com.kl.jewelry.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
-@Setter
 @Getter
-public class ProductDTO {
-
-    private Date createdDate;
+@Setter
+public class ProductFinalDTO {
+    private Date createDate;
 
     private String description;
-
 
     private Long id;
 
@@ -24,15 +20,13 @@ public class ProductDTO {
 
     private Long idMark;
 
-    private MultipartFile imageFile;
-
     private String imageProduct;
 
-    private String maSp;
+    private String maSP;
 
-    private String name;
+    private String nameSP;
 
-    private BigDecimal price;
+    private Double price;
 
     private Integer sellCount;
 
