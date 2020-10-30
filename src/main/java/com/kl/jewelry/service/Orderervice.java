@@ -1,4 +1,6 @@
 package com.kl.jewelry.service;
 
-public interface Orderervice {
+import com.kl.jewelry.model.Order;
+
+public interface Orderervice extends BaseService<Order> {
 }

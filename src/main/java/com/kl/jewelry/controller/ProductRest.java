@@ -3,6 +3,8 @@ package com.kl.jewelry.controller;
 import com.kl.jewelry.dto.*;
 import com.kl.jewelry.model.Product;
 import com.kl.jewelry.service.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/product")
 public class ProductRest {
+    private final Logger log = LoggerFactory.getLogger(ProductRest.class);
+
     private final ProductService productService;
 
     public ProductRest(ProductService productService) {
@@ -52,6 +56,7 @@ public class ProductRest {
 
     @PostMapping("/search")
     public ResponseEntity<ProductSearchDTO> searchProduct(@RequestBody ProductSearchDTO dto){
+        log.info("start res search product : {}",dto);
         productService.productSearchDto(dto);
         return new ResponseEntity<>(dto,HttpStatus.OK);
     }

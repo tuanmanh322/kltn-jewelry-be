@@ -1,4 +1,6 @@
 package com.kl.jewelry.service;
 
-public interface CartService {
+import com.kl.jewelry.model.Cart;
+
+public interface CartService extends BaseService<Cart> {
 }

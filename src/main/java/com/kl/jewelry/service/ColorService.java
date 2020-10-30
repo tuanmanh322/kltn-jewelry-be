@@ -1,4 +1,6 @@
 package com.kl.jewelry.service;
 
-public interface ColorService {
+import com.kl.jewelry.model.Color;
+
+public interface ColorService extends BaseService<Color> {
 }

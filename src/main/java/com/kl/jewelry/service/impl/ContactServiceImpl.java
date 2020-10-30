@@ -10,6 +10,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @Transactional
 public class ContactServiceImpl implements ContactService {
@@ -37,7 +40,32 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
+    public void add(Contact contact) {
+        contactRepository.save(contact);
+    }
+
+    @Override
+    public Contact getById(Long id) {
+        return contactRepository.getOne(id);
+    }
+
+    @Override
+    public List<Contact> getAll() {
+        return contactRepository.findAll();
+    }
+
+    @Override
     public void delete(Long id) {
         contactRepository.deleteById(id);
+    }
+
+    @Override
+    public void edit(Contact contact) {
+        Optional<Contact> trade = contactRepository.findById(contact.getId());
+        if (trade.isPresent()) {
+            Contact t = trade.get();
+            t = modelMapper.map(t, Contact.class);
+            contactRepository.save(t);
+        }
     }
 }

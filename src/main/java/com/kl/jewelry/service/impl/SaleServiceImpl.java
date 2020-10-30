@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Repository
@@ -23,12 +24,12 @@ public class SaleServiceImpl implements SaleService {
 
     @Override
     public void add(Sale sale) {
-
+        saleRepository.save(sale);
     }
 
     @Override
     public Sale getById(Long id) {
-        return null;
+        return saleRepository.getOne(id);
     }
 
     @Override
@@ -38,11 +39,16 @@ public class SaleServiceImpl implements SaleService {
 
     @Override
     public void delete(Long id) {
-
+        saleRepository.deleteById(id);
     }
 
     @Override
     public void edit(Sale sale) {
-
+        Optional<Sale> trade = saleRepository.findById(sale.getId());
+        if (trade.isPresent()) {
+            Sale t = trade.get();
+            t = modelMapper.map(t, Sale.class);
+            saleRepository.save(t);
+        }
     }
 }
