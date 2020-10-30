@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 31/10/2020 00:49:00
+ Date: 31/10/2020 00:50:54
 */
 
 SET NAMES utf8mb4;
@@ -125,6 +125,7 @@ CREATE TABLE `order`  (
   `phone` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `address` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `id_cart` bigint NULL DEFAULT NULL,
+  `transfer_done` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
