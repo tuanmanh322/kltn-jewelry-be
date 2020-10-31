@@ -40,4 +40,12 @@ public class ProductDetailDTO {
     private String markName;
 
     private String categoryName;
+
+    private String descriptionMark;
+
+    private Double codeSale;
+
+    private String nameSale;
+
+
 }

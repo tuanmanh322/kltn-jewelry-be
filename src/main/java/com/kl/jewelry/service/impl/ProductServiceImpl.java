@@ -2,14 +2,8 @@ package com.kl.jewelry.service.impl;
 
 import com.kl.jewelry.dao.ProductCustom;
 import com.kl.jewelry.dto.*;
-import com.kl.jewelry.model.Category;
-import com.kl.jewelry.model.Color;
-import com.kl.jewelry.model.Product;
-import com.kl.jewelry.model.Trademark;
-import com.kl.jewelry.repository.CategoryRepository;
-import com.kl.jewelry.repository.ColorRepository;
-import com.kl.jewelry.repository.ProductRepository;
-import com.kl.jewelry.repository.TrademarkRepository;
+import com.kl.jewelry.model.*;
+import com.kl.jewelry.repository.*;
 import com.kl.jewelry.service.FileStorageService;
 import com.kl.jewelry.service.ProductService;
 import org.modelmapper.ModelMapper;
@@ -35,15 +29,18 @@ public class ProductServiceImpl implements ProductService {
 
     private final CategoryRepository categoryRepository;
 
+    private final SaleRepository saleRepository;
+
     private final FileStorageService fileStoreService;
 
-    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper, ProductCustom productCustom, ColorRepository colorRepository, TrademarkRepository trademarkRepository, CategoryRepository categoryRepository, FileStorageService fileStoreService) {
+    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper, ProductCustom productCustom, ColorRepository colorRepository, TrademarkRepository trademarkRepository, CategoryRepository categoryRepository, SaleRepository saleRepository, FileStorageService fileStoreService) {
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
         this.productCustom = productCustom;
         this.colorRepository = colorRepository;
         this.trademarkRepository = trademarkRepository;
         this.categoryRepository = categoryRepository;
+        this.saleRepository = saleRepository;
         this.fileStoreService = fileStoreService;
     }
 
@@ -68,6 +65,12 @@ public class ProductServiceImpl implements ProductService {
         if (product.getIdMark() != null){
             Trademark trademark = trademarkRepository.getOne(product.getIdMark());
             dto.setMarkName(trademark.getNameProduct());
+            dto.setDescriptionMark(trademark.getDescription());
+        }
+        if (product.getIdSale() != null){
+            Sale  sale = saleRepository.getOne(product.getIdSale());
+            dto.setCodeSale(sale.getCode());
+            dto.setNameSale(sale.getName());
         }
         return dto;
     }
