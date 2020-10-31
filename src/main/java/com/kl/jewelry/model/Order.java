@@ -4,10 +4,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name = "order")
+@Table(name = "order_product")
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -25,5 +26,12 @@ public class Order implements Serializable {
     @Column(name = "phone")
     private String phone;
 
-    
+    @Column(name = "transfer_done")
+    private Boolean transferStatus;
+
+    @Column(name = "create_date")
+    private LocalDateTime createDate;
+
+    @Column(name = "id_user")
+    private Long idUser;
 }

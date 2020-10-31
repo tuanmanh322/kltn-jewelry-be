@@ -18,5 +18,7 @@ public interface ProductService {
 
     List<ProductListSaleDTO> getAllIndexSale();
 
+    List<ProductListSaleDTO> getAllRelative(ProductListSaleDTO dto);
+
     void productSearchDto(ProductSearchDTO dto);
 }

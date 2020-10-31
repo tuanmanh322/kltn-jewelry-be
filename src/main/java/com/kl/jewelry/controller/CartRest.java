@@ -1,5 +1,6 @@
 package com.kl.jewelry.controller;
 
+import com.kl.jewelry.dto.CartDTO;
 import com.kl.jewelry.model.Cart;
 import com.kl.jewelry.service.CartService;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,12 @@ public class CartRest {
     @PostMapping("/add")
     public ResponseEntity<Void> addNew(@RequestBody Cart color){
         cartService.add(color);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/add-checkout")
+    public ResponseEntity<Void> addNew(@RequestBody CartDTO cartDTO){
+        cartService.addCheckout(cartDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

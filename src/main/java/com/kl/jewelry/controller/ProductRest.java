@@ -1,6 +1,9 @@
 package com.kl.jewelry.controller;
 
-import com.kl.jewelry.dto.*;
+import com.kl.jewelry.dto.ProductDTO;
+import com.kl.jewelry.dto.ProductDetailDTO;
+import com.kl.jewelry.dto.ProductListSaleDTO;
+import com.kl.jewelry.dto.ProductSearchDTO;
 import com.kl.jewelry.model.Product;
 import com.kl.jewelry.service.ProductService;
 import org.slf4j.Logger;
@@ -46,7 +49,7 @@ public class ProductRest {
 
     @GetMapping("/relative/{idCate}/{idColor}")
     public ResponseEntity<List<Product>> getRelative(@PathVariable("idCate") Long idCate, @PathVariable("idColor") Long idColor) {
-        return new ResponseEntity<>(productService.getRelativeProduct(idCate,idColor),HttpStatus.OK);
+        return new ResponseEntity<>(productService.getRelativeProduct(idCate, idColor), HttpStatus.OK);
     }
 
     @GetMapping("/index-sale")
@@ -55,9 +58,15 @@ public class ProductRest {
     }
 
     @PostMapping("/search")
-    public ResponseEntity<ProductSearchDTO> searchProduct(@RequestBody ProductSearchDTO dto){
-        log.info("start res search product : {}",dto);
+    public ResponseEntity<ProductSearchDTO> searchProduct(@RequestBody ProductSearchDTO dto) {
+        log.info("start res search product : {}", dto);
         productService.productSearchDto(dto);
-        return new ResponseEntity<>(dto,HttpStatus.OK);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @PostMapping("/relative")
+    public ResponseEntity<List<ProductListSaleDTO>> getAllRelative(@RequestBody ProductListSaleDTO dto) {
+        log.info(" get relative : {}" ,dto);
+        return new ResponseEntity<>(productService.getAllRelative(dto), HttpStatus.OK);
     }
 }

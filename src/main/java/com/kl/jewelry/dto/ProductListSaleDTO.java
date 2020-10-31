@@ -27,6 +27,14 @@ public class ProductListSaleDTO {
 
     private Double codeSale;
 
+    private Long idSale;
+
+    private Long idColor;
+
+    private Long idCategory;
+
+    private Long idMark;
+
     public ProductListSaleDTO(Long id, String imageProduct, String maSp, String name, BigDecimal price, Integer sellCount, String saleName, Double codeSale) {
         this.id = id;
         this.imageProduct = imageProduct;

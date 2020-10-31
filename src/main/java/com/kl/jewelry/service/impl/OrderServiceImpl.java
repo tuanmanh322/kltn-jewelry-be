@@ -1,12 +1,15 @@
 package com.kl.jewelry.service.impl;
 
+import com.kl.jewelry.dto.OrderModelDTO;
 import com.kl.jewelry.model.Order;
 import com.kl.jewelry.repository.OrderRepository;
+import com.kl.jewelry.security.SecurityUtils;
 import com.kl.jewelry.service.Orderervice;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,5 +53,19 @@ public class OrderServiceImpl implements Orderervice {
             t = modelMapper.map(t, Order.class);
             orderRepository.save(t);
         }
+    }
+
+    @Override
+    public OrderModelDTO addWithCart(Order order) {
+        Order o = new Order();
+        o = modelMapper.map(order,Order.class);
+        if (SecurityUtils.getCurrentUserIdLogin() != null){
+            o.setIdUser(SecurityUtils.getCurrentUserIdLogin());
+        }
+        o.setCreateDate(LocalDateTime.now());
+        o.setTransferStatus(false);
+        orderRepository.save(o);
+        OrderModelDTO dto = modelMapper.map(o, OrderModelDTO.class);
+        return  dto;
     }
 }

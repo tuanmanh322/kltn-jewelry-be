@@ -7,8 +7,8 @@ import java.io.Serializable;
 
 @Entity
 @Data
-@Table(name = "cart")
-public class Cart implements Serializable {
+@Table(name = "cart_order")
+public class CartOrder implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -16,14 +16,11 @@ public class Cart implements Serializable {
     @Column(name = "id", insertable = false, nullable = false)
     private Long id;
 
-    @Column(name = "id_user")
-    private Long idUser;
+    @Column(name = "id_cart")
+    private Long idCart;
 
-    @Column(name = "quantity")
-    private Integer quantity;
-
-    @Column(name = "id_product")
-    private Long idProduct;
+    @Column(name = "id_order")
+    private Long idOrder;
 
     
 }

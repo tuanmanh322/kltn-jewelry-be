@@ -105,6 +105,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductListSaleDTO> getAllRelative(ProductListSaleDTO dto) {
+        return productCustom.getAllSaleRelative(dto);
+    }
+
+    @Override
     public void productSearchDto(ProductSearchDTO dto) {
         productCustom.searchProduct(dto);
     }

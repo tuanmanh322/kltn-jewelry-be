@@ -11,6 +11,7 @@ public interface ProductCustom {
 
         List<ProductListSaleDTO> getAllIndexSale();
 
+        List<ProductListSaleDTO> getAllSaleRelative(ProductListSaleDTO dto);
 
         void searchProduct(ProductSearchDTO dto);
 }

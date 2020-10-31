@@ -27,26 +27,42 @@ public class ProductCustomImpl extends AbstractDAO implements ProductCustom {
         StringBuilder sb = new StringBuilder();
         Map<String, Object> parameters = new HashMap<>();
         sb.append(" SELECT p.id as id, p.name as name, p.ma_sp as maSp, p.image_product as imageProduct, p.price as price, p.sell_count as  ");
-        sb.append(" sellCount, sale.`name` as saleName, sale.code as codeSale ");
+        sb.append(" sellCount, sale.`name` as saleName, sale.code as codeSale , p.id_sale  as idSale, p.id_color as idColor, p.id_mark as idMark, p.id_category as idCategory ");
         sb.append(" from jewelry.product as p left join jewelry.sale as sale on p.id_sale = sale.id ");
         sb.append(" WHERE p.id_sale is not null  ");
         sb.append(" ORDER BY p.created_date DESC ");
-//        sb.append(" SELECT p.id as id, p.name as name, p.maSp as maSp, p.imageProduct as imageProduct, p.price as price, p.sellCount as  ");
-//        sb.append(" sellCount, sale.name as saleName ");
-//        sb.append(" from Product as p left join Sale as sale on p.idSale = sale.id ");
-//        sb.append(" WHERE p.idSale is not null  ");
-//        sb.append(" ORDER BY p.createdDate DESC ");
-//        sb.append(" select new ");
-//        sb.append(ProductListSaleDTO.class.getName());
-//        sb.append(" ( p.id,p.name, p.imageProduct,p.price,p.sellCount,sale.name)   ");
-//        sb.append(" from Product as p left join Sale as sale on p.idSale = sale.id ");
-//        sb.append(" WHERE p.idSale is not null  ");
-//        sb.append(" ORDER BY p.createdDate DESC ");
-//        TypedQuery<ProductListSaleDTO> query = getSession().createQuery(sb.toString(),ProductListSaleDTO.class);
-//        query.setMaxResults(10);
-//        return query.getResultList();
         ((JdbcTemplate) namedParameterJdbcTemplate().getJdbcOperations()).setMaxRows(10);
         return namedParameterJdbcTemplate().query(sb.toString(), parameters, BeanPropertyRowMapper.newInstance(ProductListSaleDTO.class));
+    }
+
+    @Override
+    public List<ProductListSaleDTO> getAllSaleRelative(ProductListSaleDTO dto) {
+        StringBuilder sb = new StringBuilder();
+        Map<String, Object> parameters = new HashMap<>();
+        sb.append(" SELECT p.id as id, p.name as name, p.ma_sp as maSp, p.image_product as imageProduct, p.price as price, p.sell_count as  ");
+        sb.append(" sellCount, sale.`name` as saleName, sale.code as codeSale , p.id_sale  as idSale, p.id_color as idColor, p.id_mark as idMark, p.id_category as idCategory ");
+        sb.append(" from jewelry.product as p left join jewelry.sale as sale on p.id_sale = sale.id");
+        sb.append(" WHERE 1 = 1  ");
+        if (dto.getIdCategory() != null){
+            sb.append(" and p.id_category =:p_idcategory");
+            parameters.put("p_idcategory", dto.getIdCategory());
+        }
+        if (dto.getIdColor() != null){
+            sb.append(" and p.id_color =:p_idcorlor");
+            parameters.put("p_idcorlor", dto.getIdColor());
+        }
+        if (dto.getIdMark() != null){
+            sb.append(" and p.id_mark =:p_idmark");
+            parameters.put("p_idmark", dto.getIdMark());
+        }
+        if (dto.getIdSale() != null){
+            sb.append(" and p.id_sale =:p_idsale");
+            parameters.put("p_idsale", dto.getIdSale());
+        }
+        sb.append(" ORDER BY p.created_date DESC ");
+        ((JdbcTemplate) namedParameterJdbcTemplate().getJdbcOperations()).setMaxRows(10);
+        return namedParameterJdbcTemplate().query(sb.toString(), parameters, BeanPropertyRowMapper.newInstance(ProductListSaleDTO.class));
+
     }
 
     @Override
