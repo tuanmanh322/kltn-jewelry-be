@@ -1,4 +1,7 @@
 package com.kl.jewelry.dao;
 
-public interface CategoryCustom {
+import com.kl.jewelry.dto.CategorySearchDTO;
+
+public interface CategoryCustom extends BaseDAO{
+    void searchCate(CategorySearchDTO  dto);
 }

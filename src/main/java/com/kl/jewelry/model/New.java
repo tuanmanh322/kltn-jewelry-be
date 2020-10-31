@@ -14,7 +14,7 @@ public class New implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Column(name = "content")
-    private byte[] content;
+    private String content;
 
     @Column(name = "created_date")
     private Date createdDate;

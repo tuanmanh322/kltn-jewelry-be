@@ -1,6 +1,7 @@
 package com.kl.jewelry.service.impl;
 
 import com.kl.jewelry.dao.CategoryCustom;
+import com.kl.jewelry.dto.CategorySearchDTO;
 import com.kl.jewelry.model.Category;
 import com.kl.jewelry.repository.CategoryRepository;
 import com.kl.jewelry.service.CategoryService;
@@ -48,5 +49,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void edit(Category category) {
 
+    }
+
+    @Override
+    public void search(CategorySearchDTO dto) {
+        categoryCustom.searchCate(dto);
     }
 }

@@ -1,6 +1,7 @@
 package com.kl.jewelry.dao.impl;
 
 import com.kl.jewelry.dao.UserDAO;
+import com.kl.jewelry.dto.UserDTO;
 import com.kl.jewelry.dto.UserSearchDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -20,34 +21,28 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
         log.info("start DAO to searchUser with :{}", userSearchDTO);
         final StringBuilder sb = new StringBuilder();
         Map<String, Object> param = new HashMap<>();
-        sb.append(" select distinct t.id as idThe,");
-        sb.append(" t.ma_the as maThe,");
-        sb.append(" t.ngaycap as createDate,");
-        sb.append(" t.id_role as idRole,");
-        sb.append(" t.trangthai as active,");
-        sb.append(" u.name as userName,");
-        sb.append(" u.email as emailUser,");
-        sb.append(" u.gioitinh as sex,");
-        sb.append(" u.luongcoban as luongcoban,");
-        sb.append(" u.is_teacher as isTeacher,");
-        sb.append(" u.sodt as sodt,");
-        sb.append(" u.quequan as quequan");
-        sb.append(" from the as t ");
-        sb.append(" left join users as u on t.id = u.ma_the");
+        sb.append(" select distinct u.id as id,");
+        sb.append(" u.first_name as firstName,");
+        sb.append(" u.last_name as lastName,");
+        sb.append(" u.username as username,");
+        sb.append(" u.is_active as active,");
+        sb.append(" u.user_role as userRole,");
+        sb.append(" u.sex as sex,");
+        sb.append(" u.phone as phone,");
+        sb.append(" u.modified_date as modifiedDate,");
+        sb.append(" u.created_date as createdDate,");
+        sb.append(" u.address as address");
+        sb.append(" from jewelry.user as u");
         sb.append(" where 1 = 1");
-        if (userSearchDTO.getIdRole() != null) {
-            sb.append(" and t.id_role=:p_idRole");
-            param.put("p_idRole", userSearchDTO.getIdRole());
-        }
-        if (StringUtils.isNotBlank(userSearchDTO.getUserName())) {
+        if (StringUtils.isNotBlank(userSearchDTO.getUsername())) {
             sb.append(" and u.name like :p_userName");
-            param.put("p_userName", "%" + userSearchDTO.getUserName().trim() + "%");
+            param.put("p_userName", "%" + userSearchDTO.getUsername().trim() + "%");
         }
-        if (StringUtils.isNotBlank(userSearchDTO.getActive())){
-            sb.append(" and t.trangthai=:p_tt");
-            param.put("p_tt", userSearchDTO.getActive());
+        if (StringUtils.isNotBlank(userSearchDTO.getPhone())){
+            sb.append(" and u.phone like :p_tt");
+            param.put("p_tt","%" + userSearchDTO.getPhone().trim() + "%");
         }
-        sb.append(" order by u.name");
-        searchAndCountTotal(userSearchDTO, sb.toString(), param, UserSearchDTO.class);
+        sb.append(" order by u.username");
+        searchAndCountTotal(userSearchDTO, sb.toString(), param, UserDTO.class);
     }
 }

@@ -19,4 +19,6 @@ public class OrderModelDTO {
     private Boolean transferStatus;
 
     private LocalDateTime createDate;
+
+    private Double totalMoney;
 }

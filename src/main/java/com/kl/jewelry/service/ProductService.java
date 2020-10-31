@@ -21,4 +21,6 @@ public interface ProductService {
     List<ProductListSaleDTO> getAllRelative(ProductListSaleDTO dto);
 
     void productSearchDto(ProductSearchDTO dto);
+
+    List<AutoCompleteTitleSet> autoComplete(AutocompleteSearchDTO dto);
 }

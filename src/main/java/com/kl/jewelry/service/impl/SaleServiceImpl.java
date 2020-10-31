@@ -1,5 +1,7 @@
 package com.kl.jewelry.service.impl;
 
+import com.kl.jewelry.dao.SaleDao;
+import com.kl.jewelry.dto.SaleSearchDTO;
 import com.kl.jewelry.model.Sale;
 import com.kl.jewelry.repository.SaleRepository;
 import com.kl.jewelry.service.SaleService;
@@ -17,9 +19,12 @@ public class SaleServiceImpl implements SaleService {
 
     private final ModelMapper modelMapper;
 
-    public SaleServiceImpl(SaleRepository saleRepository, ModelMapper modelMapper) {
+    private final SaleDao saleDao;
+
+    public SaleServiceImpl(SaleRepository saleRepository, ModelMapper modelMapper, SaleDao saleDao) {
         this.saleRepository = saleRepository;
         this.modelMapper = modelMapper;
+        this.saleDao = saleDao;
     }
 
     @Override
@@ -50,5 +55,10 @@ public class SaleServiceImpl implements SaleService {
             t = modelMapper.map(t, Sale.class);
             saleRepository.save(t);
         }
+    }
+
+    @Override
+    public void search(SaleSearchDTO dto) {
+        saleDao.searchSale(dto);
     }
 }

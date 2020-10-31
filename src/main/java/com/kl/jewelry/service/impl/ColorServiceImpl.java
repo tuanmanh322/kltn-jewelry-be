@@ -1,5 +1,7 @@
 package com.kl.jewelry.service.impl;
 
+import com.kl.jewelry.dao.ColorDAO;
+import com.kl.jewelry.dto.ColorSearchDTO;
 import com.kl.jewelry.model.Color;
 import com.kl.jewelry.model.Trademark;
 import com.kl.jewelry.repository.ColorRepository;
@@ -19,11 +21,14 @@ public class ColorServiceImpl implements ColorService {
 
     private final ModelMapper modelMapper;
 
+    private final ColorDAO colorDAO;
+
     private final FileStorageService fileStorageService;
 
-    public ColorServiceImpl(ColorRepository colorRepository, ModelMapper modelMapper, FileStorageService fileStorageService) {
+    public ColorServiceImpl(ColorRepository colorRepository, ModelMapper modelMapper, ColorDAO colorDAO, FileStorageService fileStorageService) {
         this.colorRepository = colorRepository;
         this.modelMapper = modelMapper;
+        this.colorDAO = colorDAO;
         this.fileStorageService = fileStorageService;
     }
 
@@ -55,5 +60,10 @@ public class ColorServiceImpl implements ColorService {
             t = modelMapper.map(t, Color.class);
             colorRepository.save(t);
         }
+    }
+
+    @Override
+    public void search(ColorSearchDTO dto) {
+        colorDAO.searchColor(dto);
     }
 }

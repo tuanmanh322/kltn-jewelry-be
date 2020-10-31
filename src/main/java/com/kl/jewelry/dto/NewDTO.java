@@ -20,4 +20,6 @@ public class NewDTO {
     private String thumbnails;
 
     private MultipartFile file;
+
+    private String title;
 }

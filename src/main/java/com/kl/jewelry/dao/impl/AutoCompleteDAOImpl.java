@@ -17,18 +17,18 @@ public class AutoCompleteDAOImpl extends AbstractDAO implements AutoCompleteDAO 
     private final Logger log = LoggerFactory.getLogger(AutoCompleteDAOImpl.class);
 
     @Override
-    public List<AutoCompleteTitleSet> searchTitleBV(AutocompleteSearchDTO autocompleteSearchDTO) {
-        log.info(" start dao to searchTitleBV with :{}",autocompleteSearchDTO);
+    public List<AutoCompleteTitleSet> searchTitleProduct(AutocompleteSearchDTO autocompleteSearchDTO) {
+        log.info(" start dao to searchTitleProduct with :{}",autocompleteSearchDTO);
         StringBuilder sqlBuilder = new StringBuilder();
         List<String> excludeNames = autocompleteSearchDTO.getExcludeKeywords();
         sqlBuilder.append("select new ");
         sqlBuilder.append(AutoCompleteTitleSet.class.getName());
-        sqlBuilder.append("(bv.id, bv.title)");
-        sqlBuilder.append(" from Baiviet bv where bv.title like :p_title");
+        sqlBuilder.append("(bv.id, bv.name)");
+        sqlBuilder.append(" from jewelry.product as bv where bv.name like :p_title");
         if(!CollectionUtils.isEmpty(excludeNames)){
-            sqlBuilder.append(" and bv.title not in (:p_title_excludes)");
+            sqlBuilder.append(" and bv.name not in (:p_title_excludes)");
         }
-        sqlBuilder.append(" order by bv.title");
+        sqlBuilder.append(" order by bv.name");
         Query query = getSession().createQuery(sqlBuilder.toString());
         query.setParameter("p_title", "%" + autocompleteSearchDTO.getKeyword() + "%");
         if(!CollectionUtils.isEmpty(excludeNames)){

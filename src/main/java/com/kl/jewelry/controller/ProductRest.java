@@ -1,9 +1,6 @@
 package com.kl.jewelry.controller;
 
-import com.kl.jewelry.dto.ProductDTO;
-import com.kl.jewelry.dto.ProductDetailDTO;
-import com.kl.jewelry.dto.ProductListSaleDTO;
-import com.kl.jewelry.dto.ProductSearchDTO;
+import com.kl.jewelry.dto.*;
 import com.kl.jewelry.model.Product;
 import com.kl.jewelry.service.ProductService;
 import org.slf4j.Logger;
@@ -66,7 +63,12 @@ public class ProductRest {
 
     @PostMapping("/relative")
     public ResponseEntity<List<ProductListSaleDTO>> getAllRelative(@RequestBody ProductListSaleDTO dto) {
-        log.info(" get relative : {}" ,dto);
+        log.info(" get relative : {}", dto);
         return new ResponseEntity<>(productService.getAllRelative(dto), HttpStatus.OK);
+    }
+
+    @PostMapping("/auto-name")
+    public ResponseEntity<List<AutoCompleteTitleSet>> getAuto(@RequestBody AutocompleteSearchDTO dto) {
+        return new ResponseEntity<>(productService.autoComplete(dto), HttpStatus.OK);
     }
 }

@@ -1,6 +1,7 @@
 package com.kl.jewelry.controller;
 
 import com.kl.jewelry.dto.UserDTO;
+import com.kl.jewelry.dto.UserSearchDTO;
 import com.kl.jewelry.repository.UserRepository;
 import com.kl.jewelry.service.UserService;
 import org.slf4j.Logger;
@@ -40,6 +41,12 @@ public class UserController {
         return new ResponseEntity<>(userService.getProfile(), HttpStatus.OK);
     }
 
+    @PostMapping("/search")
+    public ResponseEntity<UserSearchDTO> userSearchDTOResponseEntity(@RequestBody UserSearchDTO dto) {
+        log.info("Start rest to userSearchDTOResponseEntity :{}", dto);
+        userService.userSearch(dto);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
 
 //    @GetMapping("/profile-detail")
 //    public ResponseEntity<UserDTO> getProfileDetail() {
@@ -91,12 +98,7 @@ public class UserController {
 //        return ResponseEntity.ok().build();
 //    }
 //
-//    @PostMapping("/search-user")
-//    public ResponseEntity<UserSearchDTO> userSearchDTOResponseEntity(@RequestBody UserSearchDTO dto) {
-//        log.info("Start rest to userSearchDTOResponseEntity :{}", dto);
-//        userService.userSearch(dto);
-//        return new ResponseEntity<>(dto, HttpStatus.OK);
-//    }
+
 //
 //    @PostMapping("/add-admin")
 //    public ResponseEntity<Void> addAdmin(@RequestBody UserDTO dto) throws ResultException {

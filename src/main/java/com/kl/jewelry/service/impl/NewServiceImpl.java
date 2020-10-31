@@ -2,6 +2,7 @@ package com.kl.jewelry.service.impl;
 
 import com.kl.jewelry.dao.NewCustom;
 import com.kl.jewelry.dto.NewDTO;
+import com.kl.jewelry.dto.NewSearchDTO;
 import com.kl.jewelry.model.New;
 import com.kl.jewelry.repository.NewRepository;
 import com.kl.jewelry.service.FileStorageService;
@@ -57,5 +58,10 @@ public class NewServiceImpl implements NewService {
     @Override
     public New getById(Long id) {
         return newRepository.findById(id).get();
+    }
+
+    @Override
+    public void searchNew(NewSearchDTO dto) {
+        newCustom.searchNew(dto);
     }
 }

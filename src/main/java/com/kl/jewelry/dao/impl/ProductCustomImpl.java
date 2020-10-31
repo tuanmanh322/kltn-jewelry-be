@@ -90,7 +90,7 @@ public class ProductCustomImpl extends AbstractDAO implements ProductCustom {
         sb.append(" left join jewelry.sale as sal on p.id_sale =sal.id ");
         sb.append(" where 1 = 1 ");
         if (StringUtils.isNotBlank(dto.getName())) {
-            sb.append(" and p.name=:p_name");
+            sb.append(" and p.name like :p_name");
             parameters.put("p_name", "%" + dto.getName().trim() + "%");
         }
         if (!CollectionUtils.isEmpty(dto.getIdCategory())) {

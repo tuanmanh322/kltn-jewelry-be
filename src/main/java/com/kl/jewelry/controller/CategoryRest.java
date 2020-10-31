@@ -1,7 +1,10 @@
 package com.kl.jewelry.controller;
 
+import com.kl.jewelry.dto.CategorySearchDTO;
 import com.kl.jewelry.model.Category;
 import com.kl.jewelry.service.CategoryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +14,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/category")
 public class CategoryRest {
+
+    private final Logger log = LoggerFactory.getLogger(CategoryRest.class);
+
     private final CategoryService categoryService;
 
     public CategoryRest(CategoryService categoryService) {
@@ -43,5 +49,12 @@ public class CategoryRest {
     public ResponseEntity<Void> deleteId(@PathVariable("id")Long id){
         categoryService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<CategorySearchDTO> userSearchDTOResponseEntity(@RequestBody CategorySearchDTO dto) {
+        log.info("Start rest to userSearchDTOResponseEntity :{}", dto);
+        categoryService.search(dto);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 }

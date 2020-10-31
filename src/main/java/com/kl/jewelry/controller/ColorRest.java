@@ -1,7 +1,10 @@
 package com.kl.jewelry.controller;
 
+import com.kl.jewelry.dto.ColorSearchDTO;
 import com.kl.jewelry.model.Color;
 import com.kl.jewelry.service.ColorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/color")
 public class ColorRest {
+    private final Logger log = LoggerFactory.getLogger(ColorRest.class);
 
     private final ColorService colorService;
 
@@ -45,5 +49,12 @@ public class ColorRest {
     public ResponseEntity<Void> deleteId(@PathVariable("id")Long id){
         colorService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<ColorSearchDTO> userSearchDTOResponseEntity(@RequestBody ColorSearchDTO dto) {
+        log.info("Start rest to userSearchDTOResponseEntity :{}", dto);
+        colorService.search(dto);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 }

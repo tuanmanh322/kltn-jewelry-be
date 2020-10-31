@@ -34,4 +34,7 @@ public class Order implements Serializable {
 
     @Column(name = "id_user")
     private Long idUser;
+
+    @Column(name = "total_money")
+    private Double totalMoney;
 }

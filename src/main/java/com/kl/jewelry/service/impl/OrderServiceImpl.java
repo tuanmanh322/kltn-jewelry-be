@@ -1,6 +1,8 @@
 package com.kl.jewelry.service.impl;
 
+import com.kl.jewelry.dao.OrderDAO;
 import com.kl.jewelry.dto.OrderModelDTO;
+import com.kl.jewelry.dto.OrderSearchDTO;
 import com.kl.jewelry.model.Order;
 import com.kl.jewelry.repository.OrderRepository;
 import com.kl.jewelry.security.SecurityUtils;
@@ -18,10 +20,13 @@ import java.util.Optional;
 public class OrderServiceImpl implements Orderervice {
     private final OrderRepository orderRepository;
 
+    private final OrderDAO orderDAO;
+
     private final ModelMapper modelMapper;
 
-    public OrderServiceImpl(OrderRepository orderRepository, ModelMapper modelMapper) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderDAO orderDAO, ModelMapper modelMapper) {
         this.orderRepository = orderRepository;
+        this.orderDAO = orderDAO;
         this.modelMapper = modelMapper;
     }
 
@@ -64,8 +69,14 @@ public class OrderServiceImpl implements Orderervice {
         }
         o.setCreateDate(LocalDateTime.now());
         o.setTransferStatus(false);
+        o.setTotalMoney(order.getTotalMoney());
         orderRepository.save(o);
         OrderModelDTO dto = modelMapper.map(o, OrderModelDTO.class);
         return  dto;
+    }
+
+    @Override
+    public void searchOrder(OrderSearchDTO dto) {
+        orderDAO.searchOrder(dto);
     }
 }

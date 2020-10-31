@@ -8,13 +8,13 @@ import lombok.ToString;
 @Getter
 @ToString
 public class ContactDTO {
+    private String content;
+
     private String email;
 
-    private Integer id;
+    private Long id;
 
-    private String sdt;
+    private String name;
 
-    private String status;
-
-    private String username;
+    private String phone;
 }

@@ -9,5 +9,5 @@ import lombok.*;
 @NoArgsConstructor
 public class AutoCompleteTitleSet {
     private Integer id;
-    private String titleBV;
+    private String name;
 }

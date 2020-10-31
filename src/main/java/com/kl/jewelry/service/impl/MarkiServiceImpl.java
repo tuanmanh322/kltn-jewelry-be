@@ -1,5 +1,7 @@
 package com.kl.jewelry.service.impl;
 
+import com.kl.jewelry.dao.TradeMarkDAO;
+import com.kl.jewelry.dto.TradeMarkSearchDTO;
 import com.kl.jewelry.model.Trademark;
 import com.kl.jewelry.repository.TrademarkRepository;
 import com.kl.jewelry.service.FileStorageService;
@@ -20,10 +22,13 @@ public class MarkiServiceImpl implements MarkService {
 
     private final TrademarkRepository trademarkRepository;
 
-    public MarkiServiceImpl(ModelMapper modelMapper, FileStorageService fileStorageService, TrademarkRepository trademarkRepository) {
+    private final TradeMarkDAO tradeMarkDAO;
+
+    public MarkiServiceImpl(ModelMapper modelMapper, FileStorageService fileStorageService, TrademarkRepository trademarkRepository, TradeMarkDAO tradeMarkDAO) {
         this.modelMapper = modelMapper;
         this.fileStorageService = fileStorageService;
         this.trademarkRepository = trademarkRepository;
+        this.tradeMarkDAO = tradeMarkDAO;
     }
 
     @Override
@@ -55,5 +60,10 @@ public class MarkiServiceImpl implements MarkService {
             trademarkRepository.save(t);
         }
 
+    }
+
+    @Override
+    public void search(TradeMarkSearchDTO dto) {
+        tradeMarkDAO.searchMark(dto);
     }
 }

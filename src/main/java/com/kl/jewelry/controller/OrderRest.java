@@ -1,8 +1,11 @@
 package com.kl.jewelry.controller;
 
 import com.kl.jewelry.dto.OrderModelDTO;
+import com.kl.jewelry.dto.OrderSearchDTO;
 import com.kl.jewelry.model.Order;
 import com.kl.jewelry.service.Orderervice;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +15,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/order")
 public class OrderRest {
+    private final Logger log = LoggerFactory.getLogger(OrderRest.class);
+
     private final Orderervice orderervice;
 
     public OrderRest(Orderervice orderervice) {
@@ -51,5 +56,12 @@ public class OrderRest {
     public ResponseEntity<Void> deleteId(@PathVariable("id") Long id) {
         orderervice.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<OrderSearchDTO> userSearchDTOResponseEntity(@RequestBody OrderSearchDTO dto) {
+        log.info("Start rest to userSearchDTOResponseEntity :{}", dto);
+        orderervice.searchOrder(dto);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 }

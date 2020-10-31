@@ -1,5 +1,6 @@
 package com.kl.jewelry.service.impl;
 
+import com.kl.jewelry.dao.AutoCompleteDAO;
 import com.kl.jewelry.dao.ProductCustom;
 import com.kl.jewelry.dto.*;
 import com.kl.jewelry.model.*;
@@ -33,7 +34,9 @@ public class ProductServiceImpl implements ProductService {
 
     private final FileStorageService fileStoreService;
 
-    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper, ProductCustom productCustom, ColorRepository colorRepository, TrademarkRepository trademarkRepository, CategoryRepository categoryRepository, SaleRepository saleRepository, FileStorageService fileStoreService) {
+    private final AutoCompleteDAO autoCompleteDAO;
+
+    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper, ProductCustom productCustom, ColorRepository colorRepository, TrademarkRepository trademarkRepository, CategoryRepository categoryRepository, SaleRepository saleRepository, FileStorageService fileStoreService, AutoCompleteDAO autoCompleteDAO) {
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
         this.productCustom = productCustom;
@@ -42,6 +45,7 @@ public class ProductServiceImpl implements ProductService {
         this.categoryRepository = categoryRepository;
         this.saleRepository = saleRepository;
         this.fileStoreService = fileStoreService;
+        this.autoCompleteDAO = autoCompleteDAO;
     }
 
     @Override
@@ -112,6 +116,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void productSearchDto(ProductSearchDTO dto) {
         productCustom.searchProduct(dto);
+    }
+
+    @Override
+    public List<AutoCompleteTitleSet> autoComplete(AutocompleteSearchDTO dto) {
+        return autoCompleteDAO.searchTitleProduct(dto);
     }
 
 

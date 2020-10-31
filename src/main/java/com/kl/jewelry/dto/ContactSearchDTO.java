@@ -10,11 +10,7 @@ import lombok.ToString;
 public class ContactSearchDTO extends BaseSearch {
     private String email;
 
-    private Integer id;
+    private String phone;
 
-    private String sdt;
-
-    private String status;
-
-    private String username;
+    private String name;
 }
