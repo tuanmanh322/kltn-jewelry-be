@@ -64,7 +64,7 @@ public class ContactServiceImpl implements ContactService {
         Optional<Contact> trade = contactRepository.findById(contact.getId());
         if (trade.isPresent()) {
             Contact t = trade.get();
-            t = modelMapper.map(t, Contact.class);
+            t = modelMapper.map(contact, Contact.class);
             contactRepository.save(t);
         }
     }

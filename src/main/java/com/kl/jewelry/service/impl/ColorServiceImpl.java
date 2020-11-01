@@ -57,7 +57,7 @@ public class ColorServiceImpl implements ColorService {
         Optional<Color> trade = colorRepository.findById(color.getId());
         if (trade.isPresent()) {
             Color t = trade.get();
-            t = modelMapper.map(t, Color.class);
+            t = modelMapper.map(color, Color.class);
             colorRepository.save(t);
         }
     }

@@ -17,7 +17,7 @@ public class NewCustomImpl extends AbstractDAO implements NewCustom {
 
     @Override
     public List<New> getIndex() {
-        return getSession().createQuery("select n from New n  order by n.createdDate").setMaxResults(4).getResultList();
+        return getSession().createQuery("select n from New n  order by n.createdDate desc ").setMaxResults(4).getResultList();
     }
 
     @Override

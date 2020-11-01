@@ -18,7 +18,11 @@ public class ContactDAOImpl extends AbstractDAO implements ContactDAO {
         sb.append(" select s.id as id, s.content as content , s.name as name ,s.email as email, s.phone as phone ");
         sb.append(" from jewelry.contact as s ");
         sb.append(" where 1 = 1");
-        sb.append(" order by s.id ");
+        if (StringUtils.isNotBlank(contactSearchDTO.getName())){
+            sb.append(" and s.name like :p_name ");
+            pa.put("p_name", "%" + contactSearchDTO.getName() + "%");
+        }
+        sb.append(" order by s.name ");
         searchAndCountTotal(contactSearchDTO, sb.toString(), pa, ContactDTO.class);
     }
 }

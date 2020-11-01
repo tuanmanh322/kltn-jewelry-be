@@ -10,8 +10,10 @@ import com.kl.jewelry.service.NewService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -47,6 +49,7 @@ public class NewServiceImpl implements NewService {
 
             }
         }
+        aNew.setCreatedDate(new Date());
         newRepository.save(aNew);
     }
 
@@ -63,5 +66,21 @@ public class NewServiceImpl implements NewService {
     @Override
     public void searchNew(NewSearchDTO dto) {
         newCustom.searchNew(dto);
+    }
+
+    @Override
+    public void editNew(NewDTO newDTO) {
+        New n = newRepository.getOne(newDTO.getId());
+        n.setContent(newDTO.getContent());
+        if (newDTO.getFile() != null){
+            try {
+                n.setImage(fileStoreService.storeFile(newDTO.getFile()));
+            }catch (Exception e){
+
+            }
+        }
+        n.setThumbnails(newDTO.getThumbnails());
+        n.setTitle(newDTO.getTitle());
+        newRepository.save(n);
     }
 }

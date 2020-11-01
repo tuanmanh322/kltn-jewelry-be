@@ -17,7 +17,7 @@ public class ColorDAOImpl extends AbstractDAO implements ColorDAO {
         sb.append(" select s.id as id  , s.name as name  ");
         sb.append(" from jewelry.color as s ");
         sb.append(" where 1 = 1");
-        sb.append(" order by s.id ");
+        sb.append(" order by s.name ");
         searchAndCountTotal(dto, sb.toString(), pa, ColorDTO.class);
     }
 }

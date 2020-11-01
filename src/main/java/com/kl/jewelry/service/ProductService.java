@@ -12,6 +12,9 @@ public interface ProductService {
 
     void addNewProduct(ProductDTO productDTO);
 
+    void edit(ProductDTO productDTO);
+
+
     void delete(Long id);
 
     List<Product> getRelativeProduct(Long idCategory, Long idColor);

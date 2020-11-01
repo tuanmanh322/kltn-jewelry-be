@@ -55,7 +55,7 @@ public class FileStorageServiceImpl implements FileStorageService {
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
             // get link URL load file
             String downloadFileUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path("/api/media/")
+                    .path("/api/file-load/")
                     .path(newFileName)
                     .toUriString();
             return downloadFileUri;

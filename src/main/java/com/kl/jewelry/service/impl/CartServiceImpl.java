@@ -69,7 +69,7 @@ public class CartServiceImpl implements CartService {
         Optional<Cart> trade = cartRepository.findById(cart.getId());
         if (trade.isPresent()) {
             Cart t = trade.get();
-            t = modelMapper.map(t, Cart.class);
+            t = modelMapper.map(cart, Cart.class);
             cartRepository.save(t);
         }
     }

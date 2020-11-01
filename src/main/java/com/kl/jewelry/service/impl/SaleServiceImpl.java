@@ -52,7 +52,7 @@ public class SaleServiceImpl implements SaleService {
         Optional<Sale> trade = saleRepository.findById(sale.getId());
         if (trade.isPresent()) {
             Sale t = trade.get();
-            t = modelMapper.map(t, Sale.class);
+            t = modelMapper.map(sale, Sale.class);
             saleRepository.save(t);
         }
     }

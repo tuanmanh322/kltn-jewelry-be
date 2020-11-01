@@ -26,7 +26,7 @@ public class OrderDAOImpl extends AbstractDAO implements OrderDAO {
             sb.append(" and s.phone =:p_hsotne");
             pa.put("p_hsotne", "%" + dto.getPhone().trim() + "%");
         }
-        sb.append(" order by s.hoten ");
+        sb.append(" order by s.create_date ");
         searchAndCountTotal(dto, sb.toString(), pa, OrderModelDTO.class);
     }
 }

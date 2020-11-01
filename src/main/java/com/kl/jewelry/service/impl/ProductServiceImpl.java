@@ -94,6 +94,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void edit(ProductDTO productDTO) {
+        Product  product = productRepository.getOne(productDTO.getId());
+        if (productDTO.getImageFile() != null){
+            try {
+                product.setImageProduct(fileStoreService.storeFile(productDTO.getImageFile()));
+            }catch (IOException ignored){
+
+            }
+        }
+        product.setCreatedDate(new Date());
+        productRepository.save(product);
+    }
+
+    @Override
     public void delete(Long id) {
         productRepository.deleteById(id);
     }

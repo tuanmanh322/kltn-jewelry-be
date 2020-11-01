@@ -4,12 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Setter
 @Getter
-public class ProductDTO {
+public class ProductDTO implements Serializable {
 
     private Date createdDate;
 

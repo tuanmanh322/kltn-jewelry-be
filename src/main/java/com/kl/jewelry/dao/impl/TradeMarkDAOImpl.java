@@ -17,7 +17,7 @@ public class TradeMarkDAOImpl extends AbstractDAO implements TradeMarkDAO {
         sb.append(" select s.id as id, s.description as description , s.name_product as nameProduct  ");
         sb.append(" from jewelry.trademark as s ");
         sb.append(" where 1 = 1");
-        sb.append(" order by s.id ");
+        sb.append(" order by s.name_product ");
         searchAndCountTotal(dto, sb.toString(), pa, TradeMarkDTO.class);
     }
 }

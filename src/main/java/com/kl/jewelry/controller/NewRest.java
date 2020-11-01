@@ -8,11 +8,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @RestController
+@Controller
 @RequestMapping("/api/news")
 public class NewRest {
     private final Logger log = LoggerFactory.getLogger(NewRest.class);
@@ -29,8 +32,13 @@ public class NewRest {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Void> addNeW(@RequestBody NewDTO newDTO) {
+    public ResponseEntity<Void> addNeW(@ModelAttribute NewDTO newDTO) {
         newService.addNew(newDTO);
+        return ResponseEntity.ok().build();
+    }
+    @PostMapping("/edit")
+    public ResponseEntity<Void> edit(@ModelAttribute NewDTO newDTO) {
+        newService.editNew(newDTO);
         return ResponseEntity.ok().build();
     }
 

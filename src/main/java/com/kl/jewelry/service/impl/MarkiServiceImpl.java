@@ -56,7 +56,7 @@ public class MarkiServiceImpl implements MarkService {
         Optional<Trademark> trade = trademarkRepository.findById(trademark.getId());
         if (trade.isPresent()) {
             Trademark t = trade.get();
-            t = modelMapper.map(t, Trademark.class);
+            t = modelMapper.map(trademark, Trademark.class);
             trademarkRepository.save(t);
         }
 

@@ -48,7 +48,10 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void edit(Category category) {
-
+        Category ca = categoryRepository.getOne(category.getId());
+        ca.setName(category.getName());
+        ca.setDescription(category.getDescription());
+        categoryRepository.save(ca);
     }
 
     @Override
