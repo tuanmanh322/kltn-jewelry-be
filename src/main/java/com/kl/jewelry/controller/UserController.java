@@ -1,7 +1,9 @@
 package com.kl.jewelry.controller;
 
+import com.kl.jewelry.dto.PasswordChange;
 import com.kl.jewelry.dto.UserDTO;
 import com.kl.jewelry.dto.UserSearchDTO;
+import com.kl.jewelry.exception.ResultException;
 import com.kl.jewelry.repository.UserRepository;
 import com.kl.jewelry.service.UserService;
 import org.slf4j.Logger;
@@ -27,6 +29,29 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<Void> add(@RequestBody UserDTO userDTO) {
         userService.addNewUser(userDTO);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/add-admin")
+    public ResponseEntity<Void> addAdmin(@RequestBody UserDTO userDTO) {
+        userService.addNewUserAdmin(userDTO);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/edit-profile")
+    public ResponseEntity<UserDTO> editProfile(@RequestBody UserDTO userDTO) {
+        return ResponseEntity.ok(userService.editProfile(userDTO));
+    }
+
+    @PutMapping("/edit-admin")
+    public ResponseEntity<Void> editADMIN(@RequestBody UserDTO userDTO) {
+        userService.editAdmin(userDTO);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/change-password")
+    public ResponseEntity<Void> changePassword(@RequestBody PasswordChange p) throws ResultException {
+        userService.changePassword(p);
         return ResponseEntity.ok().build();
     }
 

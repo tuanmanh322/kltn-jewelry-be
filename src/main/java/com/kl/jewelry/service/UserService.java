@@ -47,4 +47,10 @@ public interface UserService {
     void addNewUser(UserDTO userDTO);
 
     UserDTO getProfile();
+
+    void addNewUserAdmin(UserDTO userDTO);
+
+    UserDTO editProfile(UserDTO userDTO);
+
+    void editAdmin(UserDTO userDTO);
 }

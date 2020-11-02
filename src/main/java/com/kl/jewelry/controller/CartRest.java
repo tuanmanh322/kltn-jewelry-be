@@ -1,6 +1,7 @@
 package com.kl.jewelry.controller;
 
 import com.kl.jewelry.dto.CartDTO;
+import com.kl.jewelry.dto.CartDetailDTO;
 import com.kl.jewelry.model.Cart;
 import com.kl.jewelry.service.CartService;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,11 @@ public class CartRest {
     @GetMapping("/detail/{id}")
     public ResponseEntity<Cart> getById(@PathVariable("id")Long id){
         return new ResponseEntity<>(cartService.getById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/cart-list/{id}")
+    public ResponseEntity<List<CartDetailDTO>> getCartByUser(@PathVariable("id")Long id){
+        return new ResponseEntity<>(cartService.getAllByUser(id),HttpStatus.OK);
     }
 
     @PostMapping("/add")

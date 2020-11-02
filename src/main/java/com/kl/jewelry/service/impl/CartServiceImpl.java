@@ -1,6 +1,8 @@
 package com.kl.jewelry.service.impl;
 
+import com.kl.jewelry.dao.CartDAO;
 import com.kl.jewelry.dto.CartDTO;
+import com.kl.jewelry.dto.CartDetailDTO;
 import com.kl.jewelry.model.Cart;
 import com.kl.jewelry.model.CartOrder;
 import com.kl.jewelry.model.Product;
@@ -30,12 +32,15 @@ public class CartServiceImpl implements CartService {
 
     private final ProductRepository productRepository;
 
-    public CartServiceImpl(CartRepository cartRepository, ModelMapper modelMapper, FileStorageService fileStorageService, CartOrderRepository cartOrderRepository, ProductRepository productRepository) {
+    private final CartDAO cartDAO;
+
+    public CartServiceImpl(CartRepository cartRepository, ModelMapper modelMapper, FileStorageService fileStorageService, CartOrderRepository cartOrderRepository, ProductRepository productRepository, CartDAO cartDAO) {
         this.cartRepository = cartRepository;
         this.modelMapper = modelMapper;
         this.fileStorageService = fileStorageService;
         this.cartOrderRepository = cartOrderRepository;
         this.productRepository = productRepository;
+        this.cartDAO = cartDAO;
     }
 
     @Override
@@ -95,5 +100,10 @@ public class CartServiceImpl implements CartService {
         cartOrder.setIdCart(cart.getId());
         cartOrder.setIdOrder(cartDTO.getIdOrder());
         cartOrderRepository.save(cartOrder);
+    }
+
+    @Override
+    public List<CartDetailDTO> getAllByUser(Long useId) {
+        return cartDAO.listByUser(useId);
     }
 }

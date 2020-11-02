@@ -6,6 +6,7 @@ import com.kl.jewelry.dto.PasswordChange;
 import com.kl.jewelry.dto.UserCheckinDTO;
 import com.kl.jewelry.dto.UserDTO;
 import com.kl.jewelry.dto.UserSearchDTO;
+import com.kl.jewelry.exception.ErrorCode;
 import com.kl.jewelry.exception.ResultException;
 import com.kl.jewelry.model.Role;
 import com.kl.jewelry.model.User;
@@ -391,13 +392,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changePassword(PasswordChange passwordChange) throws ResultException {
-//        log.info("start service to changePassword with {} ", passwordChange);
-//        The the = theRepository.getOne(SecurityUtils.getCurrentUserIdLogin());
-//        if (!passwordEncoder.matches(passwordChange.getOldPassword(), the.getPassword())) {
-//            throw new ResultException(ErrorCode.PASSWORD_MATCH);
-//        }
-//        the.setPassword(passwordEncoder.encode(passwordChange.getNewPassword()));
-//        theRepository.save(the);
+        log.info("start service to changePassword with {} ", passwordChange);
+        User the = usersRepository.getOne(SecurityUtils.getCurrentUserIdLogin());
+        if (!passwordEncoder.matches(passwordChange.getOldPassword(), the.getPassword())) {
+            throw new ResultException(ErrorCode.PASSWORD_MATCH);
+        }
+        the.setPassword(passwordEncoder.encode(passwordChange.getNewPassword()));
+        usersRepository.save(the);
     }
 
     @Override
@@ -503,10 +504,41 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = usersRepository.findById(id);
         if (user.isPresent()){
             UserDTO dto  = modelMapper.map(user.get(),UserDTO.class);
-            Role  role =  rolesRepository.findById(dto.getUserRole()).get();
+            Role  role =  rolesRepository.findById(Integer.toUnsignedLong(user.get().getUserRole())).get();
             dto.setUserRoleName(role.getName());
             return dto;
         }
         return null;
+    }
+
+    @Override
+    public void addNewUserAdmin(UserDTO userDTO) {
+        User user = modelMapper.map(userDTO,User.class);
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setCreatedDate(new Date());
+        user.setActive(Boolean.TRUE);
+        usersRepository.save(user);
+    }
+
+    @Override
+    public UserDTO editProfile(UserDTO userDTO) {
+        User u  = usersRepository.getOne(userDTO.getId());
+        u.setFirstName(userDTO.getFirstName());
+        u.setLastName(userDTO.getLastName());
+        u.setPhone(userDTO.getPhone());
+        u.setAddress(userDTO.getAddress());
+        usersRepository.save(u);
+        return modelMapper.map(u, UserDTO.class);
+    }
+
+    @Override
+    public void editAdmin(UserDTO userDTO) {
+        User u  = usersRepository.getOne(userDTO.getId());
+        u.setFirstName(userDTO.getFirstName());
+        u.setLastName(userDTO.getLastName());
+        u.setPhone(userDTO.getPhone());
+        u.setAddress(userDTO.getAddress());
+        u.setUserRole(userDTO.getUserRole());
+        usersRepository.save(u);
     }
 }

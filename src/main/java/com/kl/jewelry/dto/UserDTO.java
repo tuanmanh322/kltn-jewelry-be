@@ -24,7 +24,7 @@ public class UserDTO {
 
     private Boolean active;
 
-    private Long userRole;
+    private Integer userRole;
 
     private Date createdDate;
 

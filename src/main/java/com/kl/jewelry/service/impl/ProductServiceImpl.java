@@ -7,6 +7,7 @@ import com.kl.jewelry.model.*;
 import com.kl.jewelry.repository.*;
 import com.kl.jewelry.service.FileStorageService;
 import com.kl.jewelry.service.ProductService;
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,24 +56,24 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDetailDTO findByDetail(Long id) {
-        Product product  = productRepository.getOne(id);
+        Product product = productRepository.getOne(id);
         ProductDetailDTO dto = modelMapper.map(product, ProductDetailDTO.class);
 
-        if (product.getIdCategory() != null){
+        if (product.getIdCategory() != null) {
             Category category = categoryRepository.getOne(product.getIdCategory());
             dto.setCategoryName(category.getName());
         }
-        if (product.getIdColor() !=null){
+        if (product.getIdColor() != null) {
             Color color = colorRepository.getOne(product.getIdColor());
             dto.setColorName(color.getName());
         }
-        if (product.getIdMark() != null){
+        if (product.getIdMark() != null) {
             Trademark trademark = trademarkRepository.getOne(product.getIdMark());
             dto.setMarkName(trademark.getNameProduct());
             dto.setDescriptionMark(trademark.getDescription());
         }
-        if (product.getIdSale() != null){
-            Sale  sale = saleRepository.getOne(product.getIdSale());
+        if (product.getIdSale() != null) {
+            Sale sale = saleRepository.getOne(product.getIdSale());
             dto.setCodeSale(sale.getCode());
             dto.setNameSale(sale.getName());
         }
@@ -81,29 +82,50 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void addNewProduct(ProductDTO productDTO) {
-        Product  product = modelMapper.map(productDTO, Product.class);
-        if (productDTO.getImageFile() != null){
+        Product product = modelMapper.map(productDTO, Product.class);
+        if (productDTO.getImageFile() != null) {
             try {
                 product.setImageProduct(fileStoreService.storeFile(productDTO.getImageFile()));
-            }catch (IOException ignored){
+            } catch (IOException ignored) {
 
             }
         }
+        product.setSellCount(0);
         product.setCreatedDate(new Date());
         productRepository.save(product);
     }
 
     @Override
     public void edit(ProductDTO productDTO) {
-        Product  product = productRepository.getOne(productDTO.getId());
-        if (productDTO.getImageFile() != null){
+        Product product = productRepository.getOne(productDTO.getId());
+        if (productDTO.getImageFile() != null) {
             try {
                 product.setImageProduct(fileStoreService.storeFile(productDTO.getImageFile()));
-            }catch (IOException ignored){
+            } catch (IOException ignored) {
 
             }
         }
-        product.setCreatedDate(new Date());
+        if (StringUtils.isNotBlank(productDTO.getDescription())) {
+            product.setDescription(productDTO.getDescription());
+        }
+        if (StringUtils.isNotBlank(productDTO.getName())) {
+            product.setName(productDTO.getName());
+        }
+        if (StringUtils.isNotBlank(productDTO.getMaSp())) {
+            product.setName(productDTO.getMaSp());
+        }
+        if (StringUtils.isNotBlank(productDTO.getMaSp())) {
+            product.setName(productDTO.getMaSp());
+        }
+        product.setIdCategory(productDTO.getIdCategory());
+        product.setIdColor(productDTO.getIdColor());
+        product.setIdMark(productDTO.getIdMark());
+        if (productDTO.getIdSale() != null) {
+            product.setIdSale(productDTO.getIdSale());
+        }
+        if (productDTO.getSellCount() != null) {
+            product.setSellCount(product.getSellCount() + productDTO.getSellCount());
+        }
         productRepository.save(product);
     }
 
@@ -114,7 +136,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getRelativeProduct(Long idCategory, Long idColor) {
-        return productRepository.findByIdCategoryAndIdColor(idCategory,idColor);
+        return productRepository.findByIdCategoryAndIdColor(idCategory, idColor);
     }
 
     @Override

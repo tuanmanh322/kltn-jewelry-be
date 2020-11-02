@@ -2,10 +2,7 @@ package com.kl.jewelry.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -23,6 +20,7 @@ public class Product implements Serializable {
 
     @Id
     @Column(name = "id", insertable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "id_category")
