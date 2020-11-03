@@ -53,4 +53,8 @@ public interface UserService {
     UserDTO editProfile(UserDTO userDTO);
 
     void editAdmin(UserDTO userDTO);
+
+    void lockUser(Long id);
+
+    void unLockUser(Long id);
 }

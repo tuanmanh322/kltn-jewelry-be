@@ -73,6 +73,18 @@ public class UserController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
+    @GetMapping("/lock-user/{id}")
+    public ResponseEntity<Void> lockUser(@PathVariable("id")Long id){
+        userService.lockUser(id);
+        return new ResponseEntity<>(  HttpStatus.OK);
+    }
+
+    @GetMapping("/un-lock-user/{id}")
+    public ResponseEntity<Void> unlockUser(@PathVariable("id")Long id){
+        userService.unLockUser(id);
+        return new ResponseEntity<>(  HttpStatus.OK);
+    }
+
 //    @GetMapping("/profile-detail")
 //    public ResponseEntity<UserDTO> getProfileDetail() {
 //        log.info("start rest to getProfileDetail");

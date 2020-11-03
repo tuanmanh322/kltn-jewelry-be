@@ -541,4 +541,18 @@ public class UserServiceImpl implements UserService {
         u.setUserRole(userDTO.getUserRole());
         usersRepository.save(u);
     }
+
+    @Override
+    public void lockUser(Long id) {
+        User u = usersRepository.getOne(id);
+        u.setActive(false);
+        usersRepository.save(u);
+    }
+
+    @Override
+    public void unLockUser(Long id) {
+        User u = usersRepository.getOne(id);
+        u.setActive(true);
+        usersRepository.save(u);
+    }
 }

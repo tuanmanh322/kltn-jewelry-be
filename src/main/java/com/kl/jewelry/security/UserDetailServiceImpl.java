@@ -34,14 +34,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String maThe) throws UsernameNotFoundException {
-        log.trace("Service authenticate: {}", maThe);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        log.trace("Service authenticate: {}", username);
         try {
-            User the = userRepository.findByUsername(maThe);
+            User the = userRepository.findByUsername(username);
             if (!the.getActive())
-                throw new UserNotActivatedException("User: " + maThe + " was not activated");
-//            if (the.getTrangthai())
-//                throw new UserLockedException("User " + maThe + " was locked");
+                throw new UserNotActivatedException("User: " + username + " was not activated");
             Role role = rolesRepository.findByCodeAndCodeGroup(the.getUserRole(), Constant.GROUP_ROLE);
             List<GrantedAuthority> grantedAuthorities = Stream.of(role.getName())
                     .map(SimpleGrantedAuthority::new)
@@ -51,7 +49,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
             userDetails.setThe(the);
             return userDetails;
         } catch (EmptyResultDataAccessException emptyResultDataAccessException) {
-            throw new UsernameNotFoundException("User with maThe " + maThe + " not found in the database");
+            throw new UsernameNotFoundException("User with user " + username + " not found in the database");
         }
     }
 }
