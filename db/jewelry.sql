@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 03/11/2020 00:33:19
+ Date: 03/11/2020 20:49:31
 */
 
 SET NAMES utf8mb4;
@@ -322,5 +322,7 @@ INSERT INTO `user` VALUES (2, b'1', 'Hà nội', NULL, 't', '123a', NULL, '$2a$1
 INSERT INTO `user` VALUES (3, b'1', NULL, '2020-10-31', 'admin', 'admin', NULL, '$2a$10$VbAab6X/snLFngsSnhJssOSklMKvSjtNqEuAtoaO16LZynL8c0IIC', '1234567899', NULL, 1, 'admin', 1);
 INSERT INTO `user` VALUES (4, b'1', NULL, '2020-11-02', 'Admin Pro1', 'Thong lv', NULL, '$2a$10$7eBLCXiAu09TU2rRDpP0ZOlSUglkbBXvlm5nW98JDYGegqvc1fTYu', NULL, NULL, 1, 'thonglv', 0);
 INSERT INTO `user` VALUES (5, b'1', 'Hà nội', '2020-11-02', 'guest', 'guest 1', NULL, '$2a$10$2D62RYWt3QBL1m6RR3ZSw.6mWZA9UH2j.f6onwWXzkJFn/aepcxsS', '1222222222', NULL, 2, 'guest', 0);
+INSERT INTO `user` VALUES (6, b'0', NULL, '2020-11-03', 'Nguyễn Văn', 'B', NULL, '$2a$10$tcD5wSX1hN4cIbl.f4zse.aWahiKRBLtipSmSPKXUcBZDRTE3sshi', '0123456789', NULL, 2, 'vanb123', 1);
+INSERT INTO `user` VALUES (7, b'1', 'Hà Nội', '2020-11-03', 'Nguyễn Thị', 'Bé', NULL, '$2a$10$JgHSw9Uo6xiTDF7FzhqsM.RXKLvS/tJ3QZCmj1UA2RfzNc.yMu322', '0123456789', NULL, 2, 'be1234', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
