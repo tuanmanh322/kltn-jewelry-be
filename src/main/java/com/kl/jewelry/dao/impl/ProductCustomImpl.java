@@ -126,10 +126,10 @@ public class ProductCustomImpl extends AbstractDAO implements ProductCustom {
                 String property = StringUtils.trimToEmpty(order.getProperty());
                 switch (property) {
                     case "newest":
-                        sb.append(" p.created_date desc");
+                        sb.append(" p.price desc");
                         break;
                     case "oldest":
-                        sb.append(" p.created_date asc");
+                        sb.append(" p.price asc");
                         break;
                     case "random":
                         sb.append(" rand() ");
