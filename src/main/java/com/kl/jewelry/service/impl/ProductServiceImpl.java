@@ -112,16 +112,14 @@ public class ProductServiceImpl implements ProductService {
             product.setName(productDTO.getName());
         }
         if (StringUtils.isNotBlank(productDTO.getMaSp())) {
-            product.setName(productDTO.getMaSp());
-        }
-        if (StringUtils.isNotBlank(productDTO.getMaSp())) {
-            product.setName(productDTO.getMaSp());
+            product.setMaSp(productDTO.getMaSp());
         }
         product.setIdCategory(productDTO.getIdCategory());
         product.setIdColor(productDTO.getIdColor());
         product.setIdMark(productDTO.getIdMark());
-        if (productDTO.getIdSale() != null) {
-            product.setIdSale(productDTO.getIdSale());
+        if (StringUtils.isNotBlank(productDTO.getISale())){
+            Long a = Long.parseLong(productDTO.getISale());
+            product.setIdSale(Long.parseLong(productDTO.getISale()));
         }
         if (productDTO.getSellCount() != null) {
             product.setSellCount(product.getSellCount() + productDTO.getSellCount());

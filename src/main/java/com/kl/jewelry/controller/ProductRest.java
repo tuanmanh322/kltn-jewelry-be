@@ -48,7 +48,7 @@ public class ProductRest {
 
     @PostMapping("/edit")
     public ResponseEntity<Void> edit(@ModelAttribute ProductDTO productDTO) {
-        productService.addNewProduct(productDTO);
+        productService.edit(productDTO);
         return ResponseEntity.ok().build();
     }
 
