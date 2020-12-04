@@ -539,6 +539,7 @@ public class UserServiceImpl implements UserService {
         u.setPhone(userDTO.getPhone());
         u.setAddress(userDTO.getAddress());
         u.setUserRole(userDTO.getUserRole());
+        u.setUsername(userDTO.getUsername());
         usersRepository.save(u);
     }
 
