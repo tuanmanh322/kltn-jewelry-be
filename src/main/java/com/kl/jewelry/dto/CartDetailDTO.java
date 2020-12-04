@@ -21,4 +21,9 @@ public class CartDetailDTO {
     private BigDecimal price;
 
     private String image;
+
+    private String firstName;
+
+    private String lastName;
+
 }

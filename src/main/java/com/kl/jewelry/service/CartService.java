@@ -10,4 +10,6 @@ public interface CartService extends BaseService<Cart> {
     void addCheckout(CartDTO cartDTO);
 
     List<CartDetailDTO> getAllByUser(Long useid);
+
+    List<CartDetailDTO> getAllByStaff();
 }

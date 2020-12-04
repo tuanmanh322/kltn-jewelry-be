@@ -106,4 +106,9 @@ public class CartServiceImpl implements CartService {
     public List<CartDetailDTO> getAllByUser(Long useId) {
         return cartDAO.listByUser(useId);
     }
+
+    @Override
+    public List<CartDetailDTO> getAllByStaff() {
+        return cartDAO.listSellInDay();
+    }
 }

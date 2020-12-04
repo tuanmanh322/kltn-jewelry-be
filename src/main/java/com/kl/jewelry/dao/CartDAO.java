@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface CartDAO extends BaseDAO {
     List<CartDetailDTO> listByUser(Long userid);
+
+    List<CartDetailDTO> listSellInDay();
 }

@@ -35,6 +35,11 @@ public class CartRest {
         return new ResponseEntity<>(cartService.getAllByUser(id),HttpStatus.OK);
     }
 
+    @GetMapping("/cart-list/by-staff")
+    public ResponseEntity<List<CartDetailDTO>> getCartByStaff(){
+        return new ResponseEntity<>(cartService.getAllByStaff(),HttpStatus.OK);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<Void> addNew(@RequestBody Cart color){
         cartService.add(color);
