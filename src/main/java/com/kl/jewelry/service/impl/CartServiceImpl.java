@@ -89,6 +89,7 @@ public class CartServiceImpl implements CartService {
         }
         cart.setQuantity(cartDTO.getQuantity());
         cart.setIdProduct(cartDTO.getIdProduct());
+        cart.setCreateDate(new Date());
         cartRepository.save(cart);
         Product product = productRepository.getOne(cart.getIdProduct());
         if (product.getSellCount() != null){
